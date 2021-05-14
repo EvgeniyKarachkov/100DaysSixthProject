@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     
     var countries = [String]()
     var score = 0
+    var correctAnswer = 0
+    var randomNumber = [1, 2, 3]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,19 +46,45 @@ class ViewController: UIViewController {
         
         askQuestion()
     }
+    
+
 
     func askQuestion() {
+        countries.shuffle()
+        randomNumber.shuffle()
+        correctAnswer = randomNumber.first! 
+        
+        
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
+        
+        title = countries[correctAnswer].uppercased()
     }
+    
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+            }
 
 
 }
+
+
+extension MutableCollection where Index == Int {
+   
+    mutating func shuffle() {
+     
+        if count < 2 { return }
+        for i in startIndex ..< endIndex - 1 {
+            let j = Int(arc4random_uniform(UInt32(endIndex - i))) + i
+            if i != j {
+                swap(&self[i], &self[j])
+            }
+        }
+    }
+}
+
+
 
