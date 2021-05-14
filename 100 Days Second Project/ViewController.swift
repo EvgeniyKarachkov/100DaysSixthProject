@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     
 
 
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         countries.shuffle()
         randomNumber.shuffle()
         correctAnswer = randomNumber.first!
